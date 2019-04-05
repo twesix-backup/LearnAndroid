@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_show_toast"
+        android:title="show toast">
+    </item>
+    <item android:id="@+id/menu_intent"
+        android:title="intent">
+    </item>
+    <item android:id="@+id/menu_main_activity"
+        android:title="show main activity">
+    </item>
+    <item android:id="@+id/menu_web_view"
+        android:title="show web view">
+    </item>
+    <item android:id="@+id/menu_dial"
+        android:title="call someone">
+    </item>
+</menu>
