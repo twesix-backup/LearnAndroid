@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    >
+
+    <LinearLayout
+        android:id="@+id/send"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/send_title"
+                android:text="username"
+                android:textSize="16sp"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+            </TextView>
+
+            <TextView
+                android:id="@+id/send_content"
+                android:text="没有内容"
+                android:layout_marginLeft="60sp"
+                android:textSize="20sp"
+                android:background="@drawable/message_right"
+                android:layout_gravity="right"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+            </TextView>
+
+        </LinearLayout>
+
+        <ImageView android:id="@+id/send_image"
+            android:src="@drawable/ic_launcher_foreground"
+            android:layout_height="80dp"
+            android:layout_width="80dp">
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/recv"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView android:id="@+id/recv_image"
+            android:src="@drawable/ic_launcher_foreground"
+            android:layout_height="80dp"
+            android:layout_width="80dp">
+        </ImageView>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/recv_title"
+                android:textSize="16sp"
+                android:layout_gravity="left"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="username">
+            </TextView>
+
+            <TextView
+                android:id="@+id/recv_content"
+                android:text="没有内容"
+                android:layout_marginRight="60sp"
+                android:textSize="20sp"
+                android:background="@drawable/message_left"
+                android:textColor="#fff"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+            </TextView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

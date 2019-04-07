@@ -11,16 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MyRecyclerView">
+        <activity android:name=".Chat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyListView">
-
+        <activity android:name=".MyRecyclerView">
         </activity>
+        <activity android:name=".MyListView"></activity>
         <activity android:name=".TextAndImageWidgets" />
         <activity android:name=".HandleClickByInterface" />
         <activity android:name=".DialogAndToast" />
@@ -28,8 +28,7 @@
         <activity
             android:name=".DialogStyle"
             android:theme="@style/Theme.AppCompat.Dialog" />
-        <activity android:name=".LifeCycle">
-        </activity>
+        <activity android:name=".LifeCycle"></activity>
         <activity android:name=".WebView">
             <intent-filter>
                 <action android:name="intent.WEB_VIEW" />
