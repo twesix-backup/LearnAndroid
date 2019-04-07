@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TextAndImageWidgets">
+
+    <TextView android:id="@+id/text_view"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textSize="28sp"
+        android:textColor="#000000"
+        android:text="this is a text view">
+    </TextView>
+
+    <EditText android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="this is a hint"
+        android:maxLines="4">
+    </EditText>
+
+    <Button android:id="@+id/button_set_text"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="set text view"
+        android:textAllCaps="false">
+    </Button>
+
+    <ImageView android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        android:src="@drawable/img01">
+    </ImageView>
+
+    <Button android:id="@+id/button_set_image"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="set image">
+    </Button>
+
+    <ProgressBar android:id="@+id/progress_bar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="100"
+        >
+    </ProgressBar>
+
+    <Button android:id="@+id/button_set_progress"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="set progress bar">
+    </Button>
+
+</LinearLayout>

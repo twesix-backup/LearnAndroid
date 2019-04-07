@@ -11,26 +11,32 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".WebView">
-            <intent-filter>
-                <action android:name="intent.WEB_VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="https"></data>
-            </intent-filter>
-        </activity>
-        <activity android:name=".Menu">
+        <activity android:name=".TextAndImageWidgets"></activity>
+        <activity android:name=".HandleClickByInterface"></activity>
+        <activity android:name=".DialogAndToast"></activity>
+        <activity android:name=".Menu" ></activity>
+        <activity android:name=".DialogStyle"
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+        <activity android:name=".LifeCycle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ButtonShowToast"
-            android:label="Click to show the toast">
+        <activity android:name=".WebView">
+            <intent-filter>
+                <action android:name="intent.WEB_VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="https" />
+            </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="intent.ACTION_START" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

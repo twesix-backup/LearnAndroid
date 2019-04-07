@@ -41,14 +41,6 @@ public class Menu extends AppCompatActivity {
                 startActivity(intent);
                 break;
             }
-            case R.id.menu_main_activity:
-            {
-//                Intent intent = new Intent(".intent.ACTION_START");
-//                intent.addCategory("android.intent.category.DEFAULT");
-                Intent intent = new Intent(Menu.this, ButtonShowToast.class);
-                startActivity(intent);
-                break;
-            }
             case R.id.menu_web_view:
             {
                 Intent intent = new Intent("intent.WEB_VIEW");

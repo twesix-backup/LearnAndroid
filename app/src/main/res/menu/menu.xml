@@ -6,9 +6,6 @@
     <item android:id="@+id/menu_intent"
         android:title="intent">
     </item>
-    <item android:id="@+id/menu_main_activity"
-        android:title="show main activity">
-    </item>
     <item android:id="@+id/menu_web_view"
         android:title="show web view">
     </item>
