@@ -11,18 +11,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".TextAndImageWidgets"></activity>
-        <activity android:name=".HandleClickByInterface"></activity>
-        <activity android:name=".DialogAndToast"></activity>
-        <activity android:name=".Menu" ></activity>
-        <activity android:name=".DialogStyle"
-            android:theme="@style/Theme.AppCompat.Dialog"></activity>
-        <activity android:name=".LifeCycle">
+        <activity android:name=".MyRecyclerView">
+        </activity>
+        <activity android:name=".MyListView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".TextAndImageWidgets" />
+        <activity android:name=".HandleClickByInterface" />
+        <activity android:name=".DialogAndToast" />
+        <activity android:name=".Menu" />
+        <activity
+            android:name=".DialogStyle"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity android:name=".LifeCycle">
         </activity>
         <activity android:name=".WebView">
             <intent-filter>
