@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,13 @@ public class MyListView extends AppCompatActivity {
 
         ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
         listView.setAdapter(stringArrayAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String string = data[position];
+                Toast.makeText(MyListView.this, string, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         ListViewWithImageAdapter listViewWithImageAdapter = new ListViewWithImageAdapter(this, R.layout.list_view_with_image, listViewWithImageList);
         for (String aData : data) {
@@ -87,11 +96,29 @@ class ListViewWithImageAdapter extends ArrayAdapter<ListViewWithImage>
     public View getView(int position, View convertView, ViewGroup parent)
     {
         ListViewWithImage listViewWithImage = getItem(position);
-        View view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
-        ImageView imageView = view.findViewById(R.id.image_view);
-        TextView textView = view.findViewById(R.id.text_view);
-        imageView.setImageResource(listViewWithImage.getImageId());
-        textView.setText(listViewWithImage.getName());
+        View view;
+        ViewHolder viewHolder;
+        if (convertView == null)
+        {
+            view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.imageView = view.findViewById(R.id.image_view);
+            viewHolder.textView = view.findViewById(R.id.text_view);
+            view.setTag(viewHolder);
+        }
+        else
+        {
+            view = convertView;
+            viewHolder = (ViewHolder) view.getTag();
+        }
+        viewHolder.imageView.setImageResource(listViewWithImage.getImageId());
+        viewHolder.textView.setText(listViewWithImage.getName());
         return view;
     }
+}
+
+class ViewHolder
+{
+    ImageView imageView;
+    TextView textView;
 }
