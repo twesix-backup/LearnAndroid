@@ -44,7 +44,7 @@
         </LinearLayout>
 
         <ImageView android:id="@+id/send_image"
-            android:src="@drawable/ic_launcher_foreground"
+            android:src="@drawable/img01"
             android:layout_height="80dp"
             android:layout_width="80dp">
         </ImageView>
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content">
 
         <ImageView android:id="@+id/recv_image"
-            android:src="@drawable/ic_launcher_foreground"
+            android:src="@drawable/img02"
             android:layout_height="80dp"
             android:layout_width="80dp">
         </ImageView>

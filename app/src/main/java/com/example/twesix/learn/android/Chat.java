@@ -47,7 +47,7 @@ public class Chat extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 messages.add(new Message(input.getText().toString(), 0));
-                messageAdapter.notifyItemInserted(messages.size() - 1);
+                messageAdapter.notifyDataSetChanged();
                 recyclerView.scrollToPosition(messages.size() - 1);
             }
         });
@@ -59,7 +59,7 @@ class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder>
     private List<Message> messageList;
     MessageAdapter(List<Message> list)
     {
-        this.messageList = list;
+        messageList = list;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder
@@ -112,6 +112,11 @@ class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder>
     @Override
     public int getItemCount() {
         return messageList.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 }
 

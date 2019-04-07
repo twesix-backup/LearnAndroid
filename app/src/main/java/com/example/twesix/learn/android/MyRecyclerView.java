@@ -124,4 +124,9 @@ class TextAndImageAdapter extends RecyclerView.Adapter<TextAndImageAdapter.ViewH
     public int getItemCount() {
         return textAndImageList.size();
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 }
