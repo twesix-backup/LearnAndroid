@@ -5,24 +5,18 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DialogAndToast">
+    tools:context=".HandleClick">
 
-    <Button android:id="@+id/button_toast"
+    <Button android:id="@+id/button_interface_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="show toast">
+        android:text="button 1">
     </Button>
 
-    <Button android:id="@+id/button_alert_dialog"
+    <Button android:id="@+id/button_interface_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="alert dialog">
-    </Button>
-
-    <Button android:id="@+id/button_proress_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="progress dialog">
+        android:text="button 2">
     </Button>
 
 </LinearLayout>

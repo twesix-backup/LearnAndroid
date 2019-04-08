@@ -5,7 +5,25 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TextAndImageWidgets">
+    tools:context=".CommonWidgets">
+
+    <Button android:id="@+id/button_toast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show toast">
+    </Button>
+
+    <Button android:id="@+id/button_alert_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="alert dialog">
+    </Button>
+
+    <Button android:id="@+id/button_proress_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="progress dialog">
+    </Button>
 
     <TextView android:id="@+id/text_view"
         android:layout_height="wrap_content"

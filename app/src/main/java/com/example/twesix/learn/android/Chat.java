@@ -47,7 +47,7 @@ public class Chat extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 messages.add(new Message(input.getText().toString(), 0));
-                messageAdapter.notifyDataSetChanged();
+                messageAdapter.notifyItemInserted(messages.size() - 1);
                 recyclerView.scrollToPosition(messages.size() - 1);
             }
         });
