@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.twesix.learn.android">
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -11,40 +17,45 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Chat">
-        </activity>
-        <activity android:name=".MyRecyclerView"></activity>
-        <activity android:name=".MyListView" />
-        <activity android:name=".CommonWidgets" >
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" />
+
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="intent.BOOT" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Chat" />
+        <activity android:name=".MyRecyclerView" />
+        <activity android:name=".MyListView" />
+        <activity android:name=".CommonWidgets" />
         <activity android:name=".HandleClick" />
-        <activity android:name=".DialogAndToast" />
-        <activity android:name=".Menu" />
         <activity
             android:name=".DialogStyle"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity android:name=".LifeCycle" />
-        <activity android:name=".WebView">
+        <activity android:name=".WebView" />
+
+        <receiver
+            android:name=".BootCompleteReceiver"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
-                <action android:name="intent.WEB_VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:scheme="https" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity">
+        </receiver>
+        <receiver
+            android:name=".MyBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
-                <action android:name="intent.ACTION_START" />
-
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="intent.EXAMPLE_BROADCAST" />
             </intent-filter>
-        </activity>
+        </receiver>
     </application>
 
 </manifest>

@@ -1,61 +1,85 @@
 package com.example.twesix.learn.android;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-public class HandleClick extends AppCompatActivity implements View.OnClickListener {
+public class HandleClick extends BaseActivity{
+
+    IntentFilter intentFilter;
+    NetworkObserver networkObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handle_click);
+
         ClickHandler clickHandler = new ClickHandler(this);
         findViewById(R.id.button_interface_1).setOnClickListener(clickHandler);
         findViewById(R.id.button_interface_2).setOnClickListener(clickHandler);
+
+        intentFilter = new IntentFilter();
+        networkObserver = new NetworkObserver();
+        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        registerReceiver(networkObserver, intentFilter);
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId())
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        unregisterReceiver(networkObserver);
+    }
+
+    class NetworkObserver extends BroadcastReceiver
+    {
+        @Override
+        public void onReceive(Context context, Intent intent)
         {
-            case R.id.button_interface_1:
+            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            if (networkInfo != null && networkInfo.isAvailable())
             {
-                Toast.makeText(this, "button interface 1", Toast.LENGTH_SHORT).show();
-                break;
+                showToast("network available");
             }
-            case R.id.button_interface_2:
+            else
             {
-                Toast.makeText(this, "button interface 2", Toast.LENGTH_SHORT).show();
-                break;
+                showToast("network unavailable");
             }
         }
     }
-}
 
-class ClickHandler implements View.OnClickListener
-{
-    private Activity activity;
-    ClickHandler(Activity activity)
+    class ClickHandler implements View.OnClickListener
     {
-        this.activity = activity;
-    }
-    @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
+        private Activity activity;
+        ClickHandler(Activity activity)
         {
-            case R.id.button_interface_1:
+            this.activity = activity;
+        }
+        @Override
+        public void onClick(View v)
+        {
+            switch (v.getId())
             {
-                Toast.makeText(this.activity, "button interface 1", Toast.LENGTH_SHORT).show();
-                break;
-            }
-            case R.id.button_interface_2:
-            {
-                Toast.makeText(this.activity, "button interface 2", Toast.LENGTH_SHORT).show();
-                break;
+                case R.id.button_interface_1:
+                {
+                    Intent intent = new Intent("intent.EXAMPLE_BROADCAST");
+                    sendBroadcast(intent);
+                    break;
+                }
+                case R.id.button_interface_2:
+                {
+                    showToast("button interface 2");
+                    break;
+                }
             }
         }
     }
