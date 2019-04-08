@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -193,7 +194,7 @@ public class BaseActivity extends AppCompatActivity  implements View.OnClickList
         }
         int getInt(String key)
         {
-            return sharedPreferences.getInt(key, 0);
+            return sharedPreferences.getInt(key, -1);
         }
         boolean getBoolean(String key)
         {
