@@ -130,8 +130,7 @@ public class CommonWidgets extends BaseActivity {
             }
             case R.id.menu_web_view:
             {
-                Intent intent = new Intent("intent.WEB_VIEW");
-                intent.setData(Uri.parse("https://www.twesix.cn"));
+                Intent intent = new Intent(this, MyWebView.class);
                 intent.putExtra("url", "https://diary.twesix.cn");
                 startActivityForResult(intent, 1);
                 break;
@@ -145,21 +144,5 @@ public class CommonWidgets extends BaseActivity {
             }
         }
         return true;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        switch (requestCode)
-        {
-            case 1:
-            {
-                if (resultCode == RESULT_OK)
-                {
-                    String url = data.getStringExtra("url");
-                    Log.d("Menu", url);
-                }
-                break;
-            }
-        }
     }
 }

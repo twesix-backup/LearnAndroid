@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -45,6 +47,22 @@ public class BaseActivity extends AppCompatActivity  implements View.OnClickList
     @Override
     public void onClick(View v)
     {
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode)
+        {
+            case 1:
+            {
+                if (resultCode == RESULT_OK)
+                {
+                    String url = data.getStringExtra("url");
+                    Log.d("MyWebView result:", url);
+                }
+                break;
+            }
+        }
     }
 
     final void showToast(String text)
