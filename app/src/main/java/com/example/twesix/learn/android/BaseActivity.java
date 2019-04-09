@@ -25,6 +25,12 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class BaseActivity extends AppCompatActivity  implements View.OnClickListener
 {
     @Override
@@ -217,6 +223,50 @@ public class BaseActivity extends AppCompatActivity  implements View.OnClickList
         boolean getBoolean(String key)
         {
             return sharedPreferences.getBoolean(key, false);
+        }
+    }
+
+    class MyOkHttp
+    {
+        String get(String url)
+        {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            Response response;
+            try
+            {
+
+                response = client.newCall(request).execute();
+                return response.body().string();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+                return e.getMessage();
+            }
+        }
+        String post(String url, FormBody.Builder body)
+        {
+            body.add("x-requested-by", "OkHttp");
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body.build())
+                    .build();
+            Response response;
+            try
+            {
+
+                response = client.newCall(request).execute();
+                return response.body().string();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+                return e.getMessage();
+            }
         }
     }
 }
