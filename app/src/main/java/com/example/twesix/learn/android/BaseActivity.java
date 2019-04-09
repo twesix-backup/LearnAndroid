@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -25,7 +27,10 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -37,6 +42,33 @@ public class BaseActivity extends AppCompatActivity  implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCollector.addActivity(this);
+        new MyOkHttp().get("http://httpbin.org/uuid", new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e)
+            {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showToast("request failed");
+                    }
+                });
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            showProgressDialog("request response", response.body().string(), true);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -228,26 +260,59 @@ public class BaseActivity extends AppCompatActivity  implements View.OnClickList
 
     class MyOkHttp
     {
-        String get(String url)
+        void get(String url, Callback callback)
         {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     .url(url)
                     .build();
-            Response response;
+            Call call = client.newCall(request);
+            call.enqueue(callback);
+        }
+
+        String getStringSync(String url)
+        {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            Call call = client.newCall(request);
             try
             {
-
-                response = client.newCall(request).execute();
-                return response.body().string();
+                Response response = call.execute();
+                if (response.body() != null)
+                {
+                    return response.body().string();
+                }
             }
             catch (IOException e)
             {
                 e.printStackTrace();
-                return e.getMessage();
             }
+            return "";
         }
-        String post(String url, FormBody.Builder body)
+        Object getJsonSync(String url)
+        {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            Call call = client.newCall(request);
+            try
+            {
+                Response response = call.execute();
+                if (response.body() != null)
+                {
+                    return new MyJSON().parse(response.body().string());
+                }
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        void post(String url, FormBody.Builder body, Callback callback)
         {
             body.add("x-requested-by", "OkHttp");
             OkHttpClient client = new OkHttpClient();
@@ -255,18 +320,44 @@ public class BaseActivity extends AppCompatActivity  implements View.OnClickList
                     .url(url)
                     .post(body.build())
                     .build();
-            Response response;
+            Call call = client.newCall(request);
+            call.enqueue(callback);
+        }
+        Object postJsonStringSync(String url, String json)
+        {
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            RequestBody body = RequestBody.create(JSON, json);
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+            Call call = client.newCall(request);
             try
             {
+                Response response = call.execute();
+                if (response.body() != null)
+                {
 
-                response = client.newCall(request).execute();
-                return response.body().string();
+                    return new MyJSON().parse(response.body().string());
+                }
             }
             catch (IOException e)
             {
                 e.printStackTrace();
-                return e.getMessage();
             }
+            return null;
+        }
+    }
+    public class MyJSON
+    {
+        Object parse(String json)
+        {
+            return JSON.parseObject(json);
+        }
+        String serialize(Object object)
+        {
+            return JSON.toJSONString(object);
         }
     }
 }

@@ -18,10 +18,6 @@ public class MainActivity extends BaseActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Intent intent = new Intent(this, MyWebView.class);
-        intent.putExtra("url", "https://diary.twesix.cn");
-        startActivityForResult(intent, 1);
     }
 
     @Override
