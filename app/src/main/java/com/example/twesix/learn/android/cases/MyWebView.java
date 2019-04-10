@@ -1,4 +1,4 @@
-package com.example.twesix.learn.android;
+package com.example.twesix.learn.android.cases;
 
 import android.content.Intent;
 import android.net.http.SslError;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.example.twesix.learn.android.R;
+import com.example.twesix.learn.android.activity.BaseActivity;
 
 public class MyWebView extends BaseActivity {
 

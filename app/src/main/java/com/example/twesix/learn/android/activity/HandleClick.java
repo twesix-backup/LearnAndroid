@@ -1,4 +1,4 @@
-package com.example.twesix.learn.android;
+package com.example.twesix.learn.android.activity;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -7,12 +7,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-public class HandleClick extends BaseActivity{
+import com.example.twesix.learn.android.R;
+import com.example.twesix.learn.android.activity.BaseActivity;
+
+public class HandleClick extends BaseActivity {
 
     IntentFilter intentFilter;
     NetworkObserver networkObserver;

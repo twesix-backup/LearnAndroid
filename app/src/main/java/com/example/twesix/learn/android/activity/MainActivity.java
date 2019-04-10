@@ -1,14 +1,11 @@
-package com.example.twesix.learn.android;
+package com.example.twesix.learn.android.activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.twesix.learn.android.R;
+import com.example.twesix.learn.android.activity.BaseActivity;
+import com.example.twesix.learn.android.activity.LoginActivity;
 
 public class MainActivity extends BaseActivity
 {
@@ -18,6 +15,9 @@ public class MainActivity extends BaseActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = new Intent(this, FragmentStatic.class);
+        startActivity(intent);
     }
 
     @Override

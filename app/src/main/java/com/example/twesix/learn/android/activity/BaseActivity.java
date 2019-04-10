@@ -1,6 +1,5 @@
-package com.example.twesix.learn.android;
+package com.example.twesix.learn.android.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,8 +14,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.example.twesix.learn.android.common.ActivityCollector;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -24,8 +23,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -42,6 +39,7 @@ public class BaseActivity extends AppCompatActivity  implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCollector.addActivity(this);
+        Log.d("BaseActivity", getClass().getSimpleName() + " activated");
         new MyOkHttp().get("http://httpbin.org/uuid", new Callback() {
             @Override
             public void onFailure(Call call, IOException e)
@@ -103,12 +101,12 @@ public class BaseActivity extends AppCompatActivity  implements View.OnClickList
         }
     }
 
-    final void showToast(String text)
+    public final void showToast(String text)
     {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
-    final void showProgressDialog(String title, String message, boolean cancelable)
+    public final void showProgressDialog(String title, String message, boolean cancelable)
     {
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle(title);
@@ -117,7 +115,7 @@ public class BaseActivity extends AppCompatActivity  implements View.OnClickList
         progressDialog.show();
     }
 
-    final void showAlertDialog(String title, String message, boolean cancelable, DialogInterface.OnClickListener positive, DialogInterface.OnClickListener negative)
+    public final void showAlertDialog(String title, String message, boolean cancelable, DialogInterface.OnClickListener positive, DialogInterface.OnClickListener negative)
     {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle(title);

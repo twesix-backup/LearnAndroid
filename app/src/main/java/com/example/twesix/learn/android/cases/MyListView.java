@@ -1,4 +1,4 @@
-package com.example.twesix.learn.android;
+package com.example.twesix.learn.android.cases;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.twesix.learn.android.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +53,7 @@ public class MyListView extends AppCompatActivity {
             }
         });
 
-        ListViewWithImageAdapter listViewWithImageAdapter = new ListViewWithImageAdapter(this, R.layout.list_view_with_image, listViewWithImageList);
+        ListViewWithImageAdapter listViewWithImageAdapter = new ListViewWithImageAdapter(this, R.layout.list_horizontal_image_text, listViewWithImageList);
         for (String aData : data) {
             ListViewWithImage listViewWithImage = new ListViewWithImage(aData, R.drawable.ic_launcher_foreground);
             listViewWithImageList.add(listViewWithImage);

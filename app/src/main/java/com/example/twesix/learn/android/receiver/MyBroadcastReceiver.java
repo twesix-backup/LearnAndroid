@@ -1,4 +1,4 @@
-package com.example.twesix.learn.android;
+package com.example.twesix.learn.android.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -18,11 +18,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".LoginActivity"
-            android:label="Sign in" />
+        <activity android:name=".activity.FragmentDynamic" />
+        <activity android:name=".activity.FragmentStatic" />
 
-        <activity android:name=".MainActivity">
+        <service
+            android:name=".service.MyService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="Sign in" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="intent.BOOT" />
@@ -30,19 +37,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Chat" />
-        <activity android:name=".MyRecyclerView" />
-        <activity android:name=".MyListView" />
-        <activity android:name=".CommonWidgets" />
-        <activity android:name=".HandleClick" />
+        <activity android:name=".cases.Chat" />
+        <activity android:name=".cases.MyRecyclerView" />
+        <activity android:name=".cases.MyListView" />
+        <activity android:name=".activity.CommonWidgets" />
+        <activity android:name=".activity.HandleClick" />
         <activity
-            android:name=".DialogStyle"
+            android:name=".activity.DialogStyle"
             android:theme="@style/Theme.AppCompat.Dialog" />
-        <activity android:name=".LifeCycle" />
-        <activity android:name=".MyWebView" />
+        <activity android:name=".activity.LifeCycle" />
+        <activity android:name=".cases.MyWebView" />
 
         <receiver
-            android:name=".BootCompleteReceiver"
+            android:name=".receiver.BootCompleteReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -50,7 +57,7 @@
             </intent-filter>
         </receiver>
         <receiver
-            android:name=".MyBroadcastReceiver"
+            android:name=".receiver.MyBroadcastReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

@@ -1,12 +1,10 @@
-package com.example.twesix.learn.android;
+package com.example.twesix.learn.android.activity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.twesix.learn.android.R;
+import com.example.twesix.learn.android.cases.MyWebView;
 
 public class CommonWidgets extends BaseActivity {
 

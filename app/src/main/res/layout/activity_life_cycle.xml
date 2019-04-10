@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LifeCycle">
+    tools:context=".activity.LifeCycle">
 
     <Button android:id="@+id/button_normal_activity"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.example.twesix.learn.android;
+package com.example.twesix.learn.android.common;
 
 import android.app.Activity;
 
