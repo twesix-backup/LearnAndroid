@@ -40,9 +40,8 @@ public class LifeCycle extends AppCompatActivity {
 
         dialog.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LifeCycle.this, DialogStyle.class);
-                startActivity(intent);
+            public void onClick(View v)
+            {
             }
         });
     }

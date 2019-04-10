@@ -22,6 +22,22 @@ public class MyWebView extends Fragment
     WebView webView;
     Activity activity;
 
+    public void goToUrl(String url)
+    {
+        webView = view.findViewById(R.id.fragment_webview);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.setWebViewClient(new WebViewClient()
+        {
+            @Override
+            public void onReceivedSslError(android.webkit.WebView view, SslErrorHandler handler, SslError error) {
+//                showProgressDialog("证书错误", "该网站的证书无法验证,请小心访问", true);
+                handler.proceed();
+            }
+        });
+        webView.loadUrl(url);
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -54,7 +70,6 @@ public class MyWebView extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-        webView = view.findViewById(R.id.fragment_webview);
     }
 
     @Override
@@ -80,20 +95,5 @@ public class MyWebView extends Fragment
     @Override
     public void onDetach() {
         super.onDetach();
-    }
-
-    public void goToUrl(String url)
-    {
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        webView.setWebViewClient(new WebViewClient()
-        {
-            @Override
-            public void onReceivedSslError(android.webkit.WebView view, SslErrorHandler handler, SslError error) {
-//                showProgressDialog("证书错误", "该网站的证书无法验证,请小心访问", true);
-                handler.proceed();
-            }
-        });
-        webView.loadUrl(url);
     }
 }

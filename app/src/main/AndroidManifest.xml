@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
+        android:name=".common.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Learn Android"
@@ -18,8 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.FragmentDynamic" />
-        <activity android:name=".activity.FragmentStatic" />
 
         <service
             android:name=".service.MyService"
@@ -37,14 +36,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.FragmentStatic" />
         <activity android:name=".cases.Chat" />
         <activity android:name=".cases.MyRecyclerView" />
         <activity android:name=".cases.MyListView" />
         <activity android:name=".activity.CommonWidgets" />
-        <activity android:name=".activity.HandleClick" />
-        <activity
-            android:name=".activity.DialogStyle"
-            android:theme="@style/Theme.AppCompat.Dialog" />
         <activity android:name=".activity.LifeCycle" />
         <activity android:name=".cases.MyWebView" />
 

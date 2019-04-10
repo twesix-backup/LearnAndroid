@@ -8,14 +8,15 @@ import com.example.twesix.learn.android.fragment.MyWebView;
 
 public class FragmentStatic extends BaseActivity
 {
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment_static);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        MyWebView myWebView = (MyWebView) fragmentManager.findFragmentById(R.id.fragment_webview);
+        fragmentManager = getSupportFragmentManager();
+        MyWebView myWebView = (MyWebView) fragmentManager.findFragmentById(R.id.fragment_right);
         myWebView.goToUrl("https://diary.twesix.cn");
     }
 }

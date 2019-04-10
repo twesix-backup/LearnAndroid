@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.twesix.learn.android.common.ActivityCollector;
+import com.example.twesix.learn.android.common.MyApplication;
+import com.example.twesix.learn.android.common.MyJSON;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -33,7 +35,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class BaseActivity extends AppCompatActivity  implements View.OnClickListener
+public class BaseActivity extends AppCompatActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +83,6 @@ public class BaseActivity extends AppCompatActivity  implements View.OnClickList
     }
 
     @Override
-    public void onClick(View v)
-    {
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode)
         {
@@ -126,103 +123,6 @@ public class BaseActivity extends AppCompatActivity  implements View.OnClickList
         dialog.show();
     }
 
-    class PersistenceByFile
-    {
-        void replace(String fileName, String content)
-        {
-            FileOutputStream fileOutputStream = null;
-            BufferedWriter bufferedWriter = null;
-            try
-            {
-                fileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
-                bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
-                bufferedWriter.write(content);
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            finally
-            {
-                try
-                {
-                    if (bufferedWriter != null)
-                    {
-                        bufferedWriter.close();
-                    }
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-        void append(String fileName, String content)
-        {
-            FileOutputStream fileOutputStream = null;
-            BufferedWriter bufferedWriter = null;
-            try
-            {
-                fileOutputStream = openFileOutput(fileName, Context.MODE_APPEND);
-                bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
-                bufferedWriter.write(content);
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            finally
-            {
-                try
-                {
-                    if (bufferedWriter != null)
-                    {
-                        bufferedWriter.close();
-                    }
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-        String read(String fileName)
-        {
-            FileInputStream in = null;
-            BufferedReader reader = null;
-            StringBuilder content = new StringBuilder();
-            try
-            {
-                in = openFileInput(fileName);
-                reader = new BufferedReader(new InputStreamReader(in));
-                String line;
-                while ((line = reader.readLine()) != null)
-                {
-                    content.append(line);
-                }
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            finally
-            {
-                try
-                {
-                    if (reader != null)
-                    {
-                        reader.close();
-                    }
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            return content.toString();
-        }
-    }
-
     class PersistenceBySharedPreferences
     {
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
@@ -256,106 +156,4 @@ public class BaseActivity extends AppCompatActivity  implements View.OnClickList
         }
     }
 
-    class MyOkHttp
-    {
-        void get(String url, Callback callback)
-        {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-            Call call = client.newCall(request);
-            call.enqueue(callback);
-        }
-
-        String getStringSync(String url)
-        {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-            Call call = client.newCall(request);
-            try
-            {
-                Response response = call.execute();
-                if (response.body() != null)
-                {
-                    return response.body().string();
-                }
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            return "";
-        }
-        Object getJsonSync(String url)
-        {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-            Call call = client.newCall(request);
-            try
-            {
-                Response response = call.execute();
-                if (response.body() != null)
-                {
-                    return new MyJSON().parse(response.body().string());
-                }
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            return null;
-        }
-        void post(String url, FormBody.Builder body, Callback callback)
-        {
-            body.add("x-requested-by", "OkHttp");
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(body.build())
-                    .build();
-            Call call = client.newCall(request);
-            call.enqueue(callback);
-        }
-        Object postJsonStringSync(String url, String json)
-        {
-            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-            RequestBody body = RequestBody.create(JSON, json);
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url(url)
-                    .post(body)
-                    .build();
-            Call call = client.newCall(request);
-            try
-            {
-                Response response = call.execute();
-                if (response.body() != null)
-                {
-
-                    return new MyJSON().parse(response.body().string());
-                }
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-    public class MyJSON
-    {
-        Object parse(String json)
-        {
-            return JSON.parseObject(json);
-        }
-        String serialize(Object object)
-        {
-            return JSON.toJSONString(object);
-        }
-    }
 }
