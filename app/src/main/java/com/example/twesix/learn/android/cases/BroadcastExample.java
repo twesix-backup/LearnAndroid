@@ -1,12 +1,7 @@
-package com.example.twesix.learn.android.activity;
+package com.example.twesix.learn.android.cases;
 
-import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +10,7 @@ import com.example.twesix.learn.android.R;
 import com.example.twesix.learn.android.activity.BaseActivity;
 import com.example.twesix.learn.android.receiver.NetworkObserver;
 
-public class HandleClick extends BaseActivity
+public class BroadcastExample extends BaseActivity
 {
 
     IntentFilter intentFilter;
@@ -25,7 +20,7 @@ public class HandleClick extends BaseActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_handle_click);
+        setContentView(R.layout.activity_broadcast_example);
 
         Button button1 = findViewById(R.id.button_interface_1);
         button1.setEnabled(false);
@@ -40,6 +35,7 @@ public class HandleClick extends BaseActivity
             showToast("button interface 2");
         });
 
+        // register a broadcast dynamically
         intentFilter = new IntentFilter();
         networkObserver = new NetworkObserver();
         intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");

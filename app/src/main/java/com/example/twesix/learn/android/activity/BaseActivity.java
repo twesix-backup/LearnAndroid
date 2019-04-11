@@ -137,7 +137,7 @@ public class BaseActivity extends AppCompatActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("key", "value");
-        Log.d("BaseActivity", getClass().getSimpleName() + " on save instance state");
+        log("on save instance state");
     }
 
     @Override
@@ -145,48 +145,48 @@ public class BaseActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         ActivityCollector.addActivity(this);
-        Log.d("BaseActivity", getClass().getSimpleName() + " on create");
+        log("on create");
         if (savedInstanceState != null)
         {
-            Log.d("BaseActivity", "saved data: key=" + savedInstanceState.getString("key"));
+            log("saved data: key=" + savedInstanceState.getString("key"));
         }
         myOkHttp = new MyOkHttp();
     }
 
     @Override
     protected void onRestart() {
-        Log.d("BaseActivity", getClass().getSimpleName() + " on restart");
+        log("on restart");
         super.onRestart();
     }
 
     @Override
     protected void onDestroy() {
-        Log.d("BaseActivity", getClass().getSimpleName() + " on destroy");
+        log("on destroy");
         super.onDestroy();
         ActivityCollector.removeActivity(this);
     }
 
     @Override
     protected void onStart() {
-        Log.d("BaseActivity", getClass().getSimpleName() + " on start");
+        log("on start");
         super.onStart();
     }
 
     @Override
     protected void onStop() {
-        Log.d("LifeCycle", "on stop");
+        log("on stop");
         super.onStop();
     }
 
     @Override
     protected void onPause() {
-        Log.d("LifeCycle", "on pause");
+        log("on pause");
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-        Log.d("LifeCycle", "on resume");
+        log("on resume");
         super.onResume();
     }
 
@@ -204,7 +204,7 @@ public class BaseActivity extends AppCompatActivity
                 if (resultCode == RESULT_OK)
                 {
                     String url = data.getStringExtra("url");
-                    Log.d("MyWebView result:", url);
+                    log("MyWebView result:" + url);
                 }
                 break;
             }
@@ -234,5 +234,10 @@ public class BaseActivity extends AppCompatActivity
         dialog.setPositiveButton("ok", positive);
         dialog.setNegativeButton("cancel", negative);
         dialog.show();
+    }
+
+    public final void log(String log)
+    {
+        Log.d("[[[" + getClass().getSimpleName() + "]]] ", log);
     }
 }

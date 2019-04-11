@@ -5,18 +5,30 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.HandleClick">
+    tools:context=".cases.ServiceExample">
 
-    <Button android:id="@+id/button_interface_1"
+    <Button android:id="@+id/start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="button 1">
+        android:text="start">
     </Button>
 
-    <Button android:id="@+id/button_interface_2"
+    <Button android:id="@+id/stop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="button 2">
+        android:text="stop">
+    </Button>
+
+    <Button android:id="@+id/bind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="bind">
+    </Button>
+
+    <Button android:id="@+id/unbind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="unbind">
     </Button>
 
 </LinearLayout>

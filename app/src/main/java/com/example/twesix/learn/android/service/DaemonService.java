@@ -6,28 +6,23 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.util.Log;
 
-public class MyService extends Service
+public class DaemonService extends BaseService
 {
-    public MyService()
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId)
     {
-    }
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        new Thread(() -> {
+        new Thread(() ->
+        {
             // do something
         });
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        int oneMinute = 60 * 1000;
-        long triggerAtTime = SystemClock.elapsedRealtime() + oneMinute;
-        Intent intent1 = new Intent(this, MyService.class);
+        int oneSecond = 1000;
+        int oneMinute = 60 * oneSecond;
+        int oneHour = 60 * oneMinute;
+        long triggerAtTime = SystemClock.elapsedRealtime() + oneSecond;
+        Intent intent1 = new Intent(this, DaemonService.class);
         PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent1, 0);
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pendingIntent);
 //        manager.setAndAllowWhileIdle(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pendingIntent);

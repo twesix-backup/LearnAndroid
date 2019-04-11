@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.twesix.learn.android">
     <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -19,16 +20,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".cases.MyOkHttpExamples"></activity>
+        <activity android:name=".cases.NotificationExample"></activity>
 
         <service
-            android:name=".service.MyService"
+            android:name=".service.ForegroundService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.DaemonService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.BaseService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity
-            android:name=".activity.LoginActivity"
-            android:label="Sign in" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +43,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="Sign in" />
+        <activity android:name=".cases.ServiceExample" />
+        <activity android:name=".cases.MyOkHttpExamples" />
         <activity android:name=".activity.FragmentStatic" />
         <activity android:name=".cases.Chat" />
         <activity android:name=".cases.MyRecyclerView" />
