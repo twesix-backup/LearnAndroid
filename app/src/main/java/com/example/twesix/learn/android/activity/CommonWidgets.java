@@ -34,75 +34,42 @@ public class CommonWidgets extends BaseActivity {
         imageView = findViewById(R.id.image_view);
         progressBar = findViewById(R.id.progress_bar);
 
-        findViewById(R.id.button_toast).setOnClickListener(this);
-        findViewById(R.id.button_alert_dialog).setOnClickListener(this);
-        findViewById(R.id.button_proress_dialog).setOnClickListener(this);
-        findViewById(R.id.button_set_image).setOnClickListener(this);
-        findViewById(R.id.button_set_text).setOnClickListener(this);
-        findViewById(R.id.button_set_progress).setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId())
+        findViewById(R.id.button_toast).setOnClickListener((View v) ->
         {
-            case R.id.button_set_text:
+            showToast("button interface 2");
+        });
+        findViewById(R.id.button_alert_dialog).setOnClickListener((View v) ->
+        {
+            DialogInterface.OnClickListener positive = (dialog, which) -> CommonWidgets.this.showToast("positive clicked");
+            DialogInterface.OnClickListener negative = (dialog, which) -> showToast("negative clicked");
+            showAlertDialog("this is the title", "this is a message", false, positive, negative);
+        });
+        findViewById(R.id.button_proress_dialog).setOnClickListener((View v) ->
+        {
+            showProgressDialog("this is title", "this is message", true);
+        });
+        findViewById(R.id.button_set_image).setOnClickListener((View v) ->
+        {
+            imageView.setImageResource(R.drawable.img02);
+        });
+        findViewById(R.id.button_set_text).setOnClickListener((View v) ->
+        {
+            textView.setText(editText.getText());
+        });
+        findViewById(R.id.button_set_progress).setOnClickListener((View v) ->
+        {
+            if (progressBar.getVisibility() == View.INVISIBLE)
             {
-                textView.setText(editText.getText());
-                break;
+                progressBar.setVisibility(View.VISIBLE);
             }
-            case R.id.button_set_image:
+            else
             {
-                imageView.setImageResource(R.drawable.img02);
-                break;
+                progressBar.setVisibility(View.INVISIBLE);
             }
-            case R.id.button_set_progress:
-            {
-                if (progressBar.getVisibility() == View.INVISIBLE)
-                {
-                    progressBar.setVisibility(View.VISIBLE);
-                }
-                else
-                {
-                    progressBar.setVisibility(View.INVISIBLE);
-                }
-                int progress = progressBar.getProgress();
-                progress = progress + 10;
-                progressBar.setProgress(progress);
-                break;
-            }
-            case R.id.button_alert_dialog:
-            {
-                DialogInterface.OnClickListener positive = new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        CommonWidgets.this.showToast("positive clicked");
-                    }
-                };
-                DialogInterface.OnClickListener negative = new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        showToast("negative clicked");
-                    }
-                };
-                this.showAlertDialog("this is the title", "this is a message", false, positive, negative);
-                break;
-            }
-            case R.id.button_toast:
-            {
-                this.showToast("button interface 2");
-                break;
-            }
-            case R.id.button_proress_dialog:
-            {
-                this.showProgressDialog("this is title", "this is message", true);
-                break;
-            }
-        }
+            int progress = progressBar.getProgress();
+            progress = progress + 10;
+            progressBar.setProgress(progress);
+        });
     }
 
     @Override

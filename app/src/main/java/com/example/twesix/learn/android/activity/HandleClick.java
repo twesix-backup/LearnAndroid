@@ -13,23 +13,32 @@ import android.widget.Button;
 
 import com.example.twesix.learn.android.R;
 import com.example.twesix.learn.android.activity.BaseActivity;
+import com.example.twesix.learn.android.receiver.NetworkObserver;
 
-public class HandleClick extends BaseActivity {
+public class HandleClick extends BaseActivity
+{
 
     IntentFilter intentFilter;
     NetworkObserver networkObserver;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handle_click);
 
-        ClickHandler clickHandler = new ClickHandler(this);
         Button button1 = findViewById(R.id.button_interface_1);
         button1.setEnabled(false);
         button1.setEnabled(true);
-        button1.setOnClickListener(clickHandler);
-        findViewById(R.id.button_interface_2).setOnClickListener(clickHandler);
+        button1.setOnClickListener((View v) ->
+        {
+            Intent intent = new Intent("intent.EXAMPLE_BROADCAST");
+            sendBroadcast(intent);
+        });
+        findViewById(R.id.button_interface_2).setOnClickListener((View v) ->
+        {
+            showToast("button interface 2");
+        });
 
         intentFilter = new IntentFilter();
         networkObserver = new NetworkObserver();
@@ -44,48 +53,4 @@ public class HandleClick extends BaseActivity {
         unregisterReceiver(networkObserver);
     }
 
-    class NetworkObserver extends BroadcastReceiver
-    {
-        @Override
-        public void onReceive(Context context, Intent intent)
-        {
-            ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-            if (networkInfo != null && networkInfo.isAvailable())
-            {
-                showToast("network available");
-            }
-            else
-            {
-                showToast("network unavailable");
-            }
-        }
-    }
-
-    class ClickHandler implements View.OnClickListener
-    {
-        private Activity activity;
-        ClickHandler(Activity activity)
-        {
-            this.activity = activity;
-        }
-        @Override
-        public void onClick(View v)
-        {
-            switch (v.getId())
-            {
-                case R.id.button_interface_1:
-                {
-                    Intent intent = new Intent("intent.EXAMPLE_BROADCAST");
-                    sendBroadcast(intent);
-                    break;
-                }
-                case R.id.button_interface_2:
-                {
-                    showToast("button interface 2");
-                    break;
-                }
-            }
-        }
-    }
 }

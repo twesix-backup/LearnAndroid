@@ -36,70 +36,9 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class BaseActivity extends AppCompatActivity implements View.OnClickListener
+public class BaseActivity extends AppCompatActivity
 {
     public MyOkHttp myOkHttp;
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        ActivityCollector.addActivity(this);
-        Log.d("BaseActivity", getClass().getSimpleName() + " created");
-        myOkHttp = new MyOkHttp();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.d("BaseActivity", getClass().getSimpleName() + " destroyed");
-        super.onDestroy();
-        ActivityCollector.removeActivity(this);
-    }
-
-    void finishAllActivity()
-    {
-        ActivityCollector.finishAll();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        switch (requestCode)
-        {
-            case 1:
-            {
-                if (resultCode == RESULT_OK)
-                {
-                    String url = data.getStringExtra("url");
-                    Log.d("MyWebView result:", url);
-                }
-                break;
-            }
-        }
-    }
-
-    public final void showToast(String text)
-    {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-    }
-
-    public final void showProgressDialog(String title, String message, boolean cancelable)
-    {
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle(title);
-        progressDialog.setMessage(message);
-        progressDialog.setCancelable(cancelable);
-        progressDialog.show();
-    }
-
-    public final void showAlertDialog(String title, String message, boolean cancelable, DialogInterface.OnClickListener positive, DialogInterface.OnClickListener negative)
-    {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-        dialog.setTitle(title);
-        dialog.setMessage(message);
-        dialog.setCancelable(cancelable);
-        dialog.setPositiveButton("ok", positive);
-        dialog.setNegativeButton("cancel", negative);
-        dialog.show();
-    }
 
     class MySharedPreferences
     {
@@ -189,6 +128,111 @@ public class BaseActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+//  完整生命期: onCreate, onDestroy, onRestart
+//  可见生命期: onStart, onStop
+//  前台生命期: onCPause, onResume
+
     @Override
-    public void onClick(View v) {}
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("key", "value");
+        Log.d("BaseActivity", getClass().getSimpleName() + " on save instance state");
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        ActivityCollector.addActivity(this);
+        Log.d("BaseActivity", getClass().getSimpleName() + " on create");
+        if (savedInstanceState != null)
+        {
+            Log.d("BaseActivity", "saved data: key=" + savedInstanceState.getString("key"));
+        }
+        myOkHttp = new MyOkHttp();
+    }
+
+    @Override
+    protected void onRestart() {
+        Log.d("BaseActivity", getClass().getSimpleName() + " on restart");
+        super.onRestart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.d("BaseActivity", getClass().getSimpleName() + " on destroy");
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
+    }
+
+    @Override
+    protected void onStart() {
+        Log.d("BaseActivity", getClass().getSimpleName() + " on start");
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.d("LifeCycle", "on stop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        Log.d("LifeCycle", "on pause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        Log.d("LifeCycle", "on resume");
+        super.onResume();
+    }
+
+    void finishAllActivity()
+    {
+        ActivityCollector.finishAll();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode)
+        {
+            case 1:
+            {
+                if (resultCode == RESULT_OK)
+                {
+                    String url = data.getStringExtra("url");
+                    Log.d("MyWebView result:", url);
+                }
+                break;
+            }
+        }
+    }
+
+    public final void showToast(String text)
+    {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    public final void showProgressDialog(String title, String message, boolean cancelable)
+    {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle(title);
+        progressDialog.setMessage(message);
+        progressDialog.setCancelable(cancelable);
+        progressDialog.show();
+    }
+
+    public final void showAlertDialog(String title, String message, boolean cancelable, DialogInterface.OnClickListener positive, DialogInterface.OnClickListener negative)
+    {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle(title);
+        dialog.setMessage(message);
+        dialog.setCancelable(cancelable);
+        dialog.setPositiveButton("ok", positive);
+        dialog.setNegativeButton("cancel", negative);
+        dialog.show();
+    }
 }

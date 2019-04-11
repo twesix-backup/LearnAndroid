@@ -42,7 +42,6 @@
         <activity android:name=".cases.MyRecyclerView" />
         <activity android:name=".cases.MyListView" />
         <activity android:name=".activity.CommonWidgets" />
-        <activity android:name=".activity.LifeCycle" />
         <activity android:name=".cases.MyWebView" />
 
         <receiver
