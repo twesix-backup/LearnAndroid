@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.twesix.learn.android.R;
 import com.example.twesix.learn.android.activity.BaseActivity;
@@ -24,7 +25,10 @@ public class HandleClick extends BaseActivity {
         setContentView(R.layout.activity_handle_click);
 
         ClickHandler clickHandler = new ClickHandler(this);
-        findViewById(R.id.button_interface_1).setOnClickListener(clickHandler);
+        Button button1 = findViewById(R.id.button_interface_1);
+        button1.setEnabled(false);
+        button1.setEnabled(true);
+        button1.setOnClickListener(clickHandler);
         findViewById(R.id.button_interface_2).setOnClickListener(clickHandler);
 
         intentFilter = new IntentFilter();

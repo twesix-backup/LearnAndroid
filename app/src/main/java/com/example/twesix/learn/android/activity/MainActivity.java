@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.twesix.learn.android.R;
+import com.example.twesix.learn.android.cases.MyOkHttpExamples;
 
 public class MainActivity extends BaseActivity
 {
@@ -14,8 +15,8 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Intent intent = new Intent(this, FragmentStatic.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, MyOkHttpExamples.class);
+        startActivity(intent);
     }
 
     @Override

@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.HashMap;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -35,44 +36,21 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class BaseActivity extends AppCompatActivity
+public class BaseActivity extends AppCompatActivity implements View.OnClickListener
 {
+    public MyOkHttp myOkHttp;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         ActivityCollector.addActivity(this);
-        Log.d("BaseActivity", getClass().getSimpleName() + " activated");
-        new MyOkHttp().get("http://httpbin.org/uuid", new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e)
-            {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        showToast("request failed");
-                    }
-                });
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, final Response response) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            showProgressDialog("request response", response.body().string(), true);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-        });
+        Log.d("BaseActivity", getClass().getSimpleName() + " created");
+        myOkHttp = new MyOkHttp();
     }
 
     @Override
     protected void onDestroy() {
+        Log.d("BaseActivity", getClass().getSimpleName() + " destroyed");
         super.onDestroy();
         ActivityCollector.removeActivity(this);
     }
@@ -123,7 +101,7 @@ public class BaseActivity extends AppCompatActivity
         dialog.show();
     }
 
-    class PersistenceBySharedPreferences
+    class MySharedPreferences
     {
         SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -156,4 +134,61 @@ public class BaseActivity extends AppCompatActivity
         }
     }
 
+    public class MyOkHttp
+    {
+
+        public void getString(String url, Callback callback)
+        {
+            String result = null;
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            Call call = client.newCall(request);
+            call.enqueue(callback);
+        }
+        public void postForm(String url, HashMap<String, String> form, Callback callback)
+        {
+            FormBody.Builder body = new FormBody.Builder();
+            body.add("x-requested-by", "OkHttp");
+            for (String key : form.keySet())
+            {
+                body.add(key, form.get(key));
+            }
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body.build())
+                    .build();
+            Call call = client.newCall(request);
+            call.enqueue(callback);
+        }
+        public void postString(String url, String bodyString, Callback callback)
+        {
+            MediaType Text = MediaType.parse("text/plain; charset=utf-8");
+            RequestBody body = RequestBody.create(Text, bodyString);
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+            Call call = client.newCall(request);
+            call.enqueue(callback);
+        }
+        public void postStringAsJson(String url, String json, Callback callback)
+        {
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            RequestBody body = RequestBody.create(JSON, json);
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+            Call call = client.newCall(request);
+            call.enqueue(callback);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {}
 }
