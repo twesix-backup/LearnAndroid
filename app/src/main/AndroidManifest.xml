@@ -81,7 +81,12 @@
             android:exported="true">
         </receiver>
         <receiver
-            android:name=".receiver.MyBroadcastReceiver"
+            android:name=".receiver.LocalBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
+        <receiver
+            android:name=".receiver.GlobalBroadcastReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

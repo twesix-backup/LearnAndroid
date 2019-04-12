@@ -5,11 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-public class MyBroadcastReceiver extends BroadcastReceiver
+public class GlobalBroadcastReceiver extends BaseBroadcastReceiver
 {
     @Override
     public void onReceive(Context context, Intent intent)
     {
+        log(intent.getStringExtra("data"));
         Toast.makeText(context, "broadcast received", Toast.LENGTH_SHORT).show();
     }
 }
