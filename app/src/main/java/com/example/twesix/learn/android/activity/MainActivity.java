@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.twesix.learn.android.R;
 import com.example.twesix.learn.android.cases.BroadcastExample;
+import com.example.twesix.learn.android.cases.NotificationExample;
 import com.example.twesix.learn.android.cases.ServiceExample;
 
 public class MainActivity extends BaseActivity
@@ -16,7 +17,7 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, ServiceExample.class);
+        Intent intent = new Intent(this, NotificationExample.class);
         startActivity(intent);
     }
 

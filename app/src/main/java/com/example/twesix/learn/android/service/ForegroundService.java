@@ -22,13 +22,13 @@ public class ForegroundService extends BaseService
     {
         super.onCreate();
 
-        String my_chanel_id = "com.example.twesix.learn.android";
-        String my_chanel_name = "twesix chanel";
+        String MY_CHANNEL_ID = "com.example.twesix.learn.android.notification";
+        String MY_CHANNEL_NAME = "Learn Android";
         NotificationChannel notificationChannel = null;
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {
-            notificationChannel = new NotificationChannel(my_chanel_id, my_chanel_name, NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel = new NotificationChannel(MY_CHANNEL_ID, MY_CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(notificationChannel);
         }
 
@@ -41,7 +41,7 @@ public class ForegroundService extends BaseService
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
                 .setContentIntent(pendingIntent)
-                .setChannelId(my_chanel_id)
+                .setChannelId(MY_CHANNEL_ID)
                 .build();
         startForeground(1111, notification);
     }

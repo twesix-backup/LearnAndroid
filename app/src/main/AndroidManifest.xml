@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".cases.NotificationExample"></activity>
+        <activity android:name=".cases.NotificationExample" />
 
         <service
             android:name=".service.ForegroundService"
@@ -32,6 +32,11 @@
             android:exported="true" />
         <service
             android:name=".service.BaseService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".service.BaseIntentService"
             android:enabled="true"
             android:exported="true" />
 

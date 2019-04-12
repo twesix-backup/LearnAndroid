@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.example.twesix.learn.android.R;
 import com.example.twesix.learn.android.activity.BaseActivity;
+import com.example.twesix.learn.android.common.MyApplication;
 
 public class NotificationExample extends BaseActivity
 {
@@ -24,28 +25,28 @@ public class NotificationExample extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_example);
 
-        findViewById(R.id.button).setOnClickListener((View v) ->
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        Intent intent = new Intent(this, NotificationExample.class);
+        int NOTIFICATION_ID = 111;
+
+        findViewById(R.id.button_add_notification).setOnClickListener((View v) ->
         {
-            String my_chanel_id = "com.example.twesix.learn.android";
-            String my_chanel_name = "twesix chanel";
-            NotificationChannel notificationChannel = null;
-            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-            {
-                notificationChannel = new NotificationChannel(my_chanel_id, my_chanel_name, NotificationManager.IMPORTANCE_DEFAULT);
-                notificationManager.createNotificationChannel(notificationChannel);
-            }
-            Intent intent = new Intent(this, NotificationExample.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-            Notification notification1 = new NotificationCompat.Builder(this, my_chanel_id)
+            Notification notification = new NotificationCompat.Builder(this)
                     .setContentTitle("Warning")
                     .setContentText("you have an urgent message to handle...")
                     .setWhen(System.currentTimeMillis())
                     .setContentIntent(pendingIntent)
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                    .setChannelId(MyApplication.MY_CHANNEL_ID)
                     .build();
-            notificationManager.notify(111, notification1);
+            notificationManager.notify(NOTIFICATION_ID, notification);
+        });
+
+        findViewById(R.id.button_remove_notification).setOnClickListener((View v) ->
+        {
+            notificationManager.cancel(NOTIFICATION_ID);
         });
     }
 }

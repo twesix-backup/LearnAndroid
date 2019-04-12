@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.example.twesix.learn.android.R;
 import com.example.twesix.learn.android.activity.BaseActivity;
+import com.example.twesix.learn.android.service.BaseIntentService;
 import com.example.twesix.learn.android.service.BaseService;
 import com.example.twesix.learn.android.service.DaemonService;
 import com.example.twesix.learn.android.service.ForegroundService;
@@ -25,12 +26,12 @@ public class ServiceExample extends BaseActivity
 
         findViewById(R.id.start).setOnClickListener((View v) ->
         {
-            Intent intent = new Intent(this, ForegroundService.class);
+            Intent intent = new Intent(this, BaseIntentService.class);
             startService(intent);
         });
         findViewById(R.id.stop).setOnClickListener((View v) ->
         {
-            Intent intent = new Intent(this, ForegroundService.class);
+            Intent intent = new Intent(this, BaseIntentService.class);
             stopService(intent);
         });
 
