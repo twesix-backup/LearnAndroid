@@ -7,10 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".cases.BroadcastExample">
 
-    <Button android:id="@+id/button_interface_1"
+    <Button android:id="@+id/button_send_broadcast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="button 1">
+        android:text="send broadcast">
     </Button>
 
     <Button android:id="@+id/button_interface_2"

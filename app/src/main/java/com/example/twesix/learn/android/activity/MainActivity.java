@@ -17,7 +17,7 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, NotificationExample.class);
+        Intent intent = new Intent(this, BroadcastExample.class);
         startActivity(intent);
     }
 

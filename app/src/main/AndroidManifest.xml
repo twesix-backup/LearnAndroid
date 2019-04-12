@@ -2,12 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.twesix.learn.android">
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -20,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity android:name=".cases.NotificationExample" />
 
         <service
@@ -34,7 +37,6 @@
             android:name=".service.BaseService"
             android:enabled="true"
             android:exported="true" />
-
         <service
             android:name=".service.BaseIntentService"
             android:enabled="true"
@@ -51,6 +53,7 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="Sign in" />
+        <activity android:name=".cases.BroadcastExample" />
         <activity android:name=".cases.ServiceExample" />
         <activity android:name=".cases.MyOkHttpExamples" />
         <activity android:name=".activity.FragmentStatic" />
@@ -61,12 +64,21 @@
         <activity android:name=".cases.MyWebView" />
 
         <receiver
+            android:name=".receiver.BaseBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
             android:name=".receiver.BootCompleteReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receiver.NetworkObserver"
+            android:enabled="true"
+            android:exported="true">
         </receiver>
         <receiver
             android:name=".receiver.MyBroadcastReceiver"

@@ -22,10 +22,16 @@ public class BroadcastExample extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_broadcast_example);
 
-        Button button1 = findViewById(R.id.button_interface_1);
-        button1.setEnabled(false);
-        button1.setEnabled(true);
-        button1.setOnClickListener((View v) ->
+        // register a broadcast dynamically
+        intentFilter = new IntentFilter();
+        networkObserver = new NetworkObserver();
+        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        registerReceiver(networkObserver, intentFilter);
+
+        Button button_send_broadcast = findViewById(R.id.button_send_broadcast);
+        button_send_broadcast.setEnabled(false);
+        button_send_broadcast.setEnabled(true);
+        button_send_broadcast.setOnClickListener((View v) ->
         {
             Intent intent = new Intent("intent.EXAMPLE_BROADCAST");
             sendBroadcast(intent);
@@ -35,11 +41,6 @@ public class BroadcastExample extends BaseActivity
             showToast("button interface 2");
         });
 
-        // register a broadcast dynamically
-        intentFilter = new IntentFilter();
-        networkObserver = new NetworkObserver();
-        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        registerReceiver(networkObserver, intentFilter);
     }
 
     @Override
