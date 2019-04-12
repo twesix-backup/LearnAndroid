@@ -51,7 +51,7 @@ public class BroadcastExample extends BaseActivity
 
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction("intent.LOCAL_BROADCAST");
-            
+
             localBroadcastManager.registerReceiver(localBroadcastReceiver, intentFilter);
 
             Intent intent = new Intent("intent.LOCAL_BROADCAST");

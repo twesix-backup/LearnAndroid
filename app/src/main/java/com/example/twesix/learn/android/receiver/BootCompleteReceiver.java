@@ -12,8 +12,6 @@ public class BootCompleteReceiver extends BroadcastReceiver
     @Override
     public void onReceive(Context context, Intent intent)
     {
-        // TODO: This method is called when the BroadcastReceiver is receiving
-        // an Intent broadcast.
         Intent daemonService = new Intent(context, DaemonService.class);
         context.startService(intent);
     }
