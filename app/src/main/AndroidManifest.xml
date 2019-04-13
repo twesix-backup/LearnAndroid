@@ -31,7 +31,7 @@
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
         </provider>
-        <activity android:name=".cases.Camera" />
+        <activity android:name=".cases.CameraAlbum" />
         <activity android:name=".cases.NotificationExample" />
 
         <service

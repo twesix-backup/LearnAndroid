@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.twesix.learn.android.R;
-import com.example.twesix.learn.android.cases.BroadcastExample;
-import com.example.twesix.learn.android.cases.Camera;
-import com.example.twesix.learn.android.cases.NotificationExample;
-import com.example.twesix.learn.android.cases.ServiceExample;
+import com.example.twesix.learn.android.cases.CameraAlbum;
 
 public class MainActivity extends BaseActivity
 {
@@ -18,7 +15,7 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, Camera.class);
+        Intent intent = new Intent(this, CameraAlbum.class);
         startActivity(intent);
     }
 
