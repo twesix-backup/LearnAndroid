@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.twesix.learn.android">
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
+
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -12,6 +12,27 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!--用于访问网络，网络定位需要上网-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--用于申请调用A-GPS模块-->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <!--用于申请获取蓝牙信息进行室内定位-->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:name=".common.MyApplication"
@@ -22,17 +43,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <provider
-            android:authorities="com.example.twesix.learn.android"
-            android:name="android.support.v4.content.FileProvider"
-            android:exported="false"
-            android:grantUriPermissions="true"
-            >
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
-        </provider>
+        <activity android:name=".cases.MyLocation" />
         <activity android:name=".cases.CameraAlbum" />
         <activity android:name=".cases.NotificationExample" />
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="intent.BOOT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".cases.LoginActivity"
+            android:label="Sign in" />
+        <activity android:name=".cases.BroadcastExample" />
+        <activity android:name=".cases.ServiceExample" />
+        <activity android:name=".cases.MyOkHttpExamples" />
+        <activity android:name=".activity.FragmentStatic" />
+        <activity android:name=".cases.Chat" />
+        <activity android:name=".cases.MyRecyclerView" />
+        <activity android:name=".cases.MyListView" />
+        <activity android:name=".activity.CommonWidgets" />
+        <activity android:name=".cases.MyWebView" />
 
         <service
             android:name=".service.ForegroundService"
@@ -51,26 +84,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="intent.BOOT" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".activity.LoginActivity"
-            android:label="Sign in" />
-        <activity android:name=".cases.BroadcastExample" />
-        <activity android:name=".cases.ServiceExample" />
-        <activity android:name=".cases.MyOkHttpExamples" />
-        <activity android:name=".activity.FragmentStatic" />
-        <activity android:name=".cases.Chat" />
-        <activity android:name=".cases.MyRecyclerView" />
-        <activity android:name=".cases.MyListView" />
-        <activity android:name=".activity.CommonWidgets" />
-        <activity android:name=".cases.MyWebView" />
+        <service android:name="com.amap.api.location.APSService" />
 
         <receiver
             android:name=".receiver.BaseBroadcastReceiver"
@@ -87,11 +101,11 @@
         <receiver
             android:name=".receiver.NetworkObserver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
         <receiver
             android:name=".receiver.LocalBroadcastReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
         <receiver
             android:name=".receiver.GlobalBroadcastReceiver"
             android:enabled="true"
@@ -100,6 +114,18 @@
                 <action android:name="intent.EXAMPLE_BROADCAST" />
             </intent-filter>
         </receiver>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.twesix.learn.android"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="1a8f206d620503215971c2be5a1f8a76" />
     </application>
 
 </manifest>

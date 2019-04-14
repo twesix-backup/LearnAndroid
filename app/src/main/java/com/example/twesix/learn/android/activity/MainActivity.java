@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.example.twesix.learn.android.R;
 import com.example.twesix.learn.android.cases.CameraAlbum;
+import com.example.twesix.learn.android.cases.MyLocation;
 
 public class MainActivity extends BaseActivity
 {
@@ -15,7 +16,7 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, CameraAlbum.class);
+        Intent intent = new Intent(this, MyLocation.class);
         startActivity(intent);
     }
 

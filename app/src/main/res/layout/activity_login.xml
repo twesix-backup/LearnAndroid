@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.LoginActivity">
+    tools:context=".cases.LoginActivity">
 
     <LinearLayout
         android:layout_marginTop="30sp"
