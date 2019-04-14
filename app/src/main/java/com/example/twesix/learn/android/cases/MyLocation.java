@@ -1,6 +1,10 @@
 package com.example.twesix.learn.android.cases;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.TextView;
 
@@ -13,7 +17,9 @@ import com.example.twesix.learn.android.activity.BaseActivity;
 import com.example.twesix.learn.android.common.MyApplication;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class MyLocation extends BaseActivity
 {
@@ -49,9 +55,17 @@ public class MyLocation extends BaseActivity
     void startLocation()
     {
         log("start location");
+        stopLocation();
         aMapLocationClient.setLocationListener(aMapLocationListener);
         aMapLocationClient.setLocationOption(aMapLocationClientOption);
-        aMapLocationClient.startLocation();
+        if (checkPermission())
+        {
+            aMapLocationClient.startLocation();
+        }
+        else
+        {
+            log("开始授权申请");
+        }
     }
 
     void stopLocation()
@@ -86,6 +100,69 @@ public class MyLocation extends BaseActivity
          + "当前室内定位的楼层: " + aMapLocation.getFloor() + "\n"
          + "GPS的当前状态: " + aMapLocation.getGpsAccuracyStatus() + "\n";
         location_info.setText(info);
+    }
+
+    final int PERMISSION_REQUEST_CODE = 1;
+    List<String> permissionList = new ArrayList<>();
+
+    boolean checkPermission()
+    {
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED)
+        {
+            permissionList.add(Manifest.permission.READ_PHONE_STATE);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        {
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (!permissionList.isEmpty())
+        {
+            String [] permissions = permissionList.toArray(new String[permissionList.size()]);
+            ActivityCompat.requestPermissions(this, permissions, PERMISSION_REQUEST_CODE);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
+        switch (requestCode)
+        {
+            case PERMISSION_REQUEST_CODE:
+            {
+                if (grantResults.length > 0)
+                {
+                    for (int i = 0; i < permissions.length; i ++)
+                    {
+                        log(permissions[i] + ": " + Integer.toString(grantResults[i]));
+                    }
+                    for (int grantResult : grantResults)
+                    {
+                        if (grantResult != PackageManager.PERMISSION_GRANTED)
+                        {
+                            showToast("必须同意所有权限才能使用本程序");
+                            finish();
+                            return;
+                        }
+                    }
+                    showToast("授权成功");
+                    startLocation();
+                }
+                else
+                {
+                    showToast("发生未知授权错误");
+                }
+            }
+        }
     }
 
     @Override
