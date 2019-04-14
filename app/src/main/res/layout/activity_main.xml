@@ -1,18 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+        <Button android:id="@+id/button_base_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="base activity" />
+        <Button android:id="@+id/button_common_widgets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="common widgets" />
+        <Button android:id="@+id/button_fragment_static"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fragment static" />
+        <Button android:id="@+id/button_runtime_permission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="runtime permission" />
+        <Button android:id="@+id/button_broadcast_example"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="broadcast example" />
+        <Button android:id="@+id/button_camera_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="camera album" />
+        <Button android:id="@+id/button_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="chat" />
+        <Button android:id="@+id/button_login_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="login activity" />
+        <Button android:id="@+id/button_my_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="my list view" />
+        <Button android:id="@+id/button_my_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="my location" />
+        <Button android:id="@+id/button_my_ok_http_example"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="my ok http example" />
+        <Button android:id="@+id/button_my_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="my recycler view" />
+        <Button android:id="@+id/button_my_web_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="my web view" />
+        <Button android:id="@+id/button_notification_example"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="notification example" />
+        <Button android:id="@+id/button_service_example"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="service example" />
+    </LinearLayout>
+
+</ScrollView>
